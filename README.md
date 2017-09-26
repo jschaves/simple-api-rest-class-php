@@ -1,6 +1,6 @@
 # simple-api-rest-class-php
 This class displays a Simple Api Rest query in json format
-
+<pre>
 //name user
 $array_login['user'] = 'admin';
 //pass - md5 example e10adc3949ba59abbe56e057f20f883e = 123456
@@ -23,3 +23,4 @@ $query->db = $array_login;
 
 header('Content-type: application/json');
 echo $query->ReturnLogin();
+</pre>
