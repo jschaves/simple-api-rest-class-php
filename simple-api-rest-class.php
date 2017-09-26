@@ -51,7 +51,7 @@ $array_login['pass'] = 'e10adc3949ba59abbe56e057f20f883e';
 //results brand : "Iphone, Samsung"
 $array_login['brand'] = 'Iphone, Samsung';
 $array_login['model'] = '{Iphone:[Iphone 5, Iphone 6]}, {Samsung:[Samsung Galaxy S6, Samsung Galaxy S7]}';
-$array_login['quantity'] = '[3, 5], [4, 2]';
+$array_login['quantity'] = '{Iphone:{Iphone 5:3, Iphone 6:4}';
 
 
 
