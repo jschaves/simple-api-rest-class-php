@@ -13,7 +13,6 @@ class SimpleApiRestClass {
 	public $login_user;
 	public $login_pass;
 	public $query;
-	private $get_key;
 	
     /**
      * Method public ReturnLogin.
