@@ -26,7 +26,7 @@ class SimpleApiRestClass {
 		//if loguin error
 		} else {
 			
-			echo 'User or password is wrong';
+			return json_encode('[User or password is wrong]');
 		
 		}
 		
