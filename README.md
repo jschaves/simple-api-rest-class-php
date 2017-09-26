@@ -1,7 +1,7 @@
 # simple-api-rest-class-php
 This class displays a Simple Api Rest query in json format
 <pre>
-&#62;?php
+&#60;?php
 /**
  * this class displays a Simple Api Rest query in json format.
  * @author Juan Chaves, juan.cha63@gmail.com
@@ -70,6 +70,6 @@ $query->db = $array_login;
 header('Content-type: application/json');
 echo $query->ReturnLogin();
 
-?&#60;
+?&#62;
 
 </pre>
