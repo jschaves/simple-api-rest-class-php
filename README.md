@@ -77,6 +77,8 @@ $query->db = $array_login;
 header('Content-type: application/json');
 echo $query->ReturnLogin();
 
+?&#62;
+
 //result simple_api_rest_class.php?u=admin&p=123456&q=brand,model,quantity
 brand	
 0	"Iphone"
@@ -95,8 +97,5 @@ Iphone 6	15
 Samsung	
 Galaxy S6	30
 Galaxy S7	55
-
-
-?&#62;
 
 </pre>
