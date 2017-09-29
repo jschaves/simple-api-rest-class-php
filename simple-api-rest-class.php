@@ -1,4 +1,5 @@
  <?php
+ 
 /**
  * this class displays a Simple Api Rest query in json format.
  * @author Juan Chaves, juan.cha63@gmail.com
@@ -10,7 +11,7 @@ class SimpleApiRestClass {
     public $login_user;
     public $login_pass;
     public $query;
-    private $get_key;
+    public $db;
    
     /**
      * Method public ReturnLogin.
@@ -73,7 +74,5 @@ $query->db = $array_login;
 
 header('Content-type: application/json');
 echo $query->ReturnLogin();
-
-
 
 ?>
