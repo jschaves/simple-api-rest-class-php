@@ -76,18 +76,20 @@ include('./server.php');
 </pre>
 
 <h2>User data and password in login.php</h2>
+<pre>
 Get or Post variables from the query:
 ?u=admin&p=123456
 //name user
 $array_login['user'] = 'admin';
 //pass - md5 example e10adc3949ba59abbe56e057f20f883e = 123456
 $array_login['pass'] = 'e10adc3949ba59abbe56e057f20f883e';
-
+</pre>
 <h2>Change in server.php the connection data to the database</h2>
+<pre>
 $connect =  mysql_connect('localhost', 'api_rest', 'xxxxxxxx');
-
+</pre>
 <h2>Use</h2>
-
+<pre>
 u = User login 
 p = User Password
 q = Query
@@ -99,3 +101,7 @@ q=Iphone,Asus
 Service put the bitch before -> would be the name of the key and update {object name:object value}
 Example:
 q=Iphone->{name:Tablet},{value:103}
+</pre>
+
+<h2>Sql example simple_api_rest.sql</h2>
+
