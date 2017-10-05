@@ -103,5 +103,5 @@ Example:
 q=Iphone->{name:Tablet},{value:103}
 </pre>
 
-<h2>Sql example simple_api_rest.sql</h2>
+<h2><a href="https://github.com/jschaves/simple-api-rest-class-php/blob/master/simple_api_rest.sql">Sql example simple_api_rest.sql</a></h2>
 
