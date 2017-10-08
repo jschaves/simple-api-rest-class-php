@@ -1,6 +1,6 @@
 # simple-api-rest-class-php
 This class displays a Simple Api Rest query in json format
-The services are added GET, POST, PUT and DELETE
+The services are added GET, POST, PUT and DELETE.
 
 
 $this->session_ok:
@@ -15,6 +15,8 @@ Array separated by comma, update the fields with the format (title: value, title
 
 $query->allows_services;
 Type of service I allow in the query
+
+Para usar el ejemplo, primero descargue todos los archivos, importe simple_api_rest.sql y ponga los datos de conexion a la base de datos en connect.php.php. Luego acceda a login.html.
 
 <pre>
 <h2>Service post</h2>
@@ -48,6 +50,5 @@ if($_SESSION['loggedin']) {
 	$post_query = $query->ReturnLogin();
 	include('./server.php');
 }
-Database file connet.php database data
-$connect =  mysql_connect('localhost', 'api_rest', '');
+
 </pre>
