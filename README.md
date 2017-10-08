@@ -1,6 +1,6 @@
 # simple-api-rest-class-php
-This class displays a Simple Api Rest query in json format
-The services are added GET, POST, PUT and DELETE.
+This class displays a Simple Api Rest query in json format.
+Services GET, POST, PUT and DELETE.
 
 
 $this->session_ok:
@@ -49,6 +49,10 @@ if($_SESSION['loggedin']) {
 	$query->allows_services = 'put';
 	$post_query = $query->ReturnLogin();
 	include('./server.php');
+} else {
+
+	echo 'You must be logged in to access this site'; 
+	
 }
 
 <h2>Service get</h2>
