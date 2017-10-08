@@ -16,7 +16,7 @@ Array separated by comma, update the fields with the format (title: value, title
 $query->allows_services;
 Type of service I allow in the query
 
-Para usar el ejemplo, primero descargue todos los archivos, importe simple_api_rest.sql y ponga los datos de conexion a la base de datos en connect.php.php. Luego acceda a login.html.
+To use the example, first download all the files, import simple_api_rest.sql and put the connection data to the database in connect.php.php. Then log in to login.html.
 
 <pre>
 <h2>Service post</h2>
