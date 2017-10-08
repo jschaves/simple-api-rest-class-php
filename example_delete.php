@@ -1,4 +1,5 @@
 <?php
+session_start();
 /**
  * this class displays a Simple Api Rest query in json format.
  * @author Juan Chaves, juan.cha63@gmail.com
@@ -6,16 +7,14 @@
  * This program is free software; distributed under the artistic license.
  */
 //example_delete.php?u=admin&p=123456&q=Iphone,Asus&s=delete
-include('./simple_api_rest_class.php');
-include('./login.php');
-//Example
-$query = new SimpleApiRestClass();
-$query->login_user = $_GET['u'];
-$query->login_pass = $_GET['p'];
-$query->query = $_GET['q'];
-$query->service = $_GET['s'];
-$query->allows_services = 'delete';
-$query->db = $array_login;
-$post_query = $query->ReturnLogin();
-include('./server.php');
+if($_SESSION['loggedin']) {
+	include('./simple_api_rest_class.php');
+	//Example
+	$query = new SimpleApiRestClass();
+	$query->session_ok = $_SESSION['loggedin'];
+	$query->query = $_REQUEST['q'];
+	$query->allows_services = 'delete';
+	$post_query = $query->ReturnLogin();
+	include('./server.php');
+}
 ?>

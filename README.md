@@ -2,106 +2,52 @@
 This class displays a Simple Api Rest query in json format
 The services are added GET, POST, PUT and DELETE
 
-<h2>Example service post</h2>
-//example_post.php?u=admin&p=123456&q=Iphone,Asus&s=post
+
+$this->session_ok:
+It is used to confirm that the user is accredited
+
+$query->query;
+Separate comma array to create, access, modify, or delete an element
+note: in the put service only one field can be updated at a time
+
+$query->update
+Array separated by comma, update the fields with the format (title: value, title: value) for service only put
+
+$query->allows_services;
+Type of service I allow in the query
 
 <pre>
-include('./simple_api_rest_class.php');
-include('./login.php');
-//Example
-$query = new SimpleApiRestClass();
-$query->login_user = $_GET['u'];
-$query->login_pass = $_GET['p'];
-$query->query = $_GET['q'];
-$query->service = $_GET['s'];
-$query->allows_services = 'post';
-$query->db = $array_login;
-$post_query = $query->ReturnLogin();
-include('./server.php');
+<h2>Service post</h2>
+//example_post.php?q=Iphone,Asus
+if($_SESSION['loggedin']) {
+	include('./simple_api_rest_class.php');
+	//Example
+	$query = new SimpleApiRestClass();
+	$query->session_ok = $_SESSION['loggedin'];
+	$query->query = $_REQUEST['q'];
+	$query->allows_services = 'post';
+	$post_query = $query->ReturnLogin();
+	include('./server.php');
+} else {
+
+	echo 'You must be logged in to access this site'; 
+	
+}
+
+<h2>Service put</h2>
+//example_put.php?q=Iphone&u=name:Tablet,value:103
+if($_SESSION['loggedin']) {
+	include('./simple_api_rest_class.php');
+	include('./login.php');
+	//Example
+	$query = new SimpleApiRestClass();
+	$query->session_ok = $_SESSION['loggedin'];
+	$query->query = $_REQUEST['q'];
+	$query->update = $_REQUEST['u'];
+	$query->allows_services = 'put';
+	$post_query = $query->ReturnLogin();
+	include('./server.php');
+}
+Database file connet.php database data
+$connect =  mysql_connect('localhost', 'api_rest', '');
 </pre>
-
-<h2>Example service put</h2>
-//example_put.php?u=admin&p=123456&q=Iphone->{name:Tablet},{value:103}&s=put
-//example_put.php?u=admin&p=123456&q=Asus->{name:Phone},{value:53}&s=put
-
-<pre>
-include('./simple_api_rest_class.php');
-include('./login.php');
-//Example
-$query = new SimpleApiRestClass();
-$query->login_user = $_GET['u'];
-$query->login_pass = $_GET['p'];
-$query->query = $_GET['q'];
-$query->service = $_GET['s'];
-$query->allows_services = 'put';
-$query->db = $array_login;
-$post_query = $query->ReturnLogin();
-include('./server.php');
-</pre>
-
-<h2>Example service get</h2>
-//example_get.php?u=admin&p=123456&q=Asus,Iphone&s=get
-
-<pre>
-include('./simple_api_rest_class.php');
-include('./login.php');
-//Example
-$query = new SimpleApiRestClass();
-$query->login_user = $_GET['u'];
-$query->login_pass = $_GET['p'];
-$query->query = $_GET['q'];
-$query->service = $_GET['s'];
-$query->allows_services = 'get';
-$query->db = $array_login;
-$post_query = $query->ReturnLogin();
-include('./server.php');
-</pre>
-
-<h2>Example service delete</h2>
-//example_delete.php?u=admin&p=123456&q=Iphone,Asus&s=delete
-
-<pre>
-include('./simple_api_rest_class.php');
-include('./login.php');
-//Example
-$query = new SimpleApiRestClass();
-$query->login_user = $_GET['u'];
-$query->login_pass = $_GET['p'];
-$query->query = $_GET['q'];
-$query->service = $_GET['s'];
-$query->allows_services = 'delete';
-$query->db = $array_login;
-$post_query = $query->ReturnLogin();
-include('./server.php');
-</pre>
-
-<h2>User data and password in login.php</h2>
-<pre>
-Get or Post variables from the query:
-?u=admin&p=123456
-//name user
-$array_login['user'] = 'admin';
-//pass - md5 example e10adc3949ba59abbe56e057f20f883e = 123456
-$array_login['pass'] = 'e10adc3949ba59abbe56e057f20f883e';
-</pre>
-<h2>Change in server.php the connection data to the database</h2>
-<pre>
-$connect =  mysql_connect('localhost', 'api_rest', 'xxxxxxxx');
-</pre>
-<h2>Use</h2>
-<pre>
-u = User login 
-p = User Password
-q = Query
-s = Service request
-$query->allows_services = That is allowed
-Services get, post and delete comma separator
-Examples:
-q=Iphone,Asus
-Service put the bitch before -> would be the name of the key and update {object name:object value}
-Example:
-q=Iphone->{name:Tablet},{value:103}
-</pre>
-
-<h2><a href="https://github.com/jschaves/simple-api-rest-class-php/blob/master/simple_api_rest.sql">Sql example simple_api_rest.sql</a></h2>
-

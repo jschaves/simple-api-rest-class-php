@@ -5,10 +5,9 @@
  * Copyright (C) 2017 Juan Chaves
  * This program is free software; distributed under the artistic license.
  */
-if($post_query != 'error') {
-	
-	$connect =  mysql_connect('localhost', 'api_rest', '9243aabb');
-	mysql_set_charset('utf8', $connect);
+if($post_query[0] != 'error' && $_SESSION['loggedin']) {
+
+	include('./connect.php');
 	
 	if(!$connect) {
 		
@@ -22,11 +21,11 @@ if($post_query != 'error') {
 		
 		} else {
 			//The post service creates a new field
-			if($query->service === 'post') {
+			if($query->allows_services === 'post') {
 				
 				foreach($post_query as $pq) {
-				
-					$consult = mysql_query('INSERT INTO `simple_api_rest`(`ID`) VALUES (\'' . $pq . '\')', $connect);
+
+					$consult = mysql_query('INSERT INTO `simple_api_rest`(`ID`) VALUES (\'' . mysql_real_escape_string($pq) . '\')', $connect);
 					
 					if(mysql_affected_rows() > 0) {
 
@@ -40,11 +39,11 @@ if($post_query != 'error') {
 				
 				}
 			//The delete service deletes a field and its values
-			} else if($query->service === 'delete') {
+			} else if($query->allows_services === 'delete') {
 				
 				foreach($post_query as $pq) {
 
-					$consult = mysql_query('DELETE FROM simple_api_rest WHERE ID = "' . $pq . '"', $connect);
+					$consult = mysql_query('DELETE FROM simple_api_rest WHERE ID = "' . mysql_real_escape_string($pq) . '"', $connect);
 
 					if(mysql_affected_rows() > 0) {
 
@@ -58,11 +57,12 @@ if($post_query != 'error') {
 				
 				}
 			//The get service displays a field and its values
-			} else if($query->service === 'get') {
+			} else if($query->allows_services === 'get') {
 
 				foreach($post_query as $pq) {
 
-					$consult = mysql_query('SELECT `name`, `value` FROM simple_api_rest WHERE ID = "' . $pq . '"', $connect);
+					$consult = mysql_query('SELECT `name`, `value` FROM simple_api_rest WHERE ID = \'' . mysql_real_escape_string($pq) . '\'', $connect);
+					
 					$rows = mysql_fetch_row($consult);
 					
 					if($rows > 0) {
@@ -91,14 +91,14 @@ if($post_query != 'error') {
 				
 				}
 			//The put service updates the values ​​of a field
-			} else if($query->service === 'put') {
+			} else if($query->allows_services === 'put') {
 
 				foreach($post_query as $key => $pq) {
 					
 					foreach($pq as $data) {
 						
 						$name_value = explode(':', $data);
-						$string_query = 'UPDATE `simple_api_rest` SET `' . trim($name_value[0]) . '`=\'' . trim($name_value[1]) . '\' WHERE `ID`=\'' . trim($key) . '\'';
+						$string_query = 'UPDATE `simple_api_rest` SET `' . trim(mysql_real_escape_string($name_value[0])) . '`=\'' . trim(mysql_real_escape_string($name_value[1])) . '\' WHERE `ID`=\'' . trim(mysql_real_escape_string($key)) . '\'';
 						$consult = mysql_query($string_query, $connect);
 						if(mysql_affected_rows() > 0) {
 							
@@ -106,7 +106,7 @@ if($post_query != 'error') {
 						
 						} else {
 
-							$output_data[$key][$data] = $data . ' Not found in the database';
+							$output_data[$key][$data] = $data . ' Failed to update, view sent values or the value is not changed because it is the same';
 							
 						}
 		
@@ -127,7 +127,7 @@ if($post_query != 'error') {
 	
 } else {
 	
-	echo 'Error check your permissions';
+	echo $post_query[1];
 	
 }
 ?>

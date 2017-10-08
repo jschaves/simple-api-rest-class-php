@@ -7,27 +7,23 @@
  */
 class SimpleApiRestClass {
    
-    public $login_user;
-    public $login_pass;
     public $query;
-    public $db;
 	public $allows_services;
-	public $service;
-   
+	public $session_ok;
+	public $update;
+  
     /**
      * Method public ReturnLogin.
      * @return Method private _login
      */
     public function ReturnLogin() {
+		
         //if logging is ok
-        if(
-            $this->login_user === $this->db['user'] &&
-            md5($this->login_pass) === $this->db['pass']
-        ) {
+        if($this->session_ok) {
 			//If the requested permission is correct
-			if($this->allows_services == $this->service) {
+			if($this->allows_services && !empty($this->query)) {
 
-				switch($this->service) {
+				switch($this->allows_services) {
 					
 					case 'get':
 						return $this->_return_get();
@@ -36,7 +32,15 @@ class SimpleApiRestClass {
 						return $this->_return_post();
 						break;
 					case 'put':
-						return $this->_return_put();
+						if(!empty($this->query)) {
+							
+							return $this->_return_put();
+							
+						} else {
+							//If the camp is empty
+							return array('error', 'Field can not be empty');
+							
+						}
 						break;
 					case 'delete':
 						return $this->_return_delete();
@@ -46,13 +50,13 @@ class SimpleApiRestClass {
 				
 			} else {
 				//If the requested permission is not correct
-				return 'error';
+				return array('error', 'Field can not be empty');
 				
 			}
         //if loguin error
         } else {
 			//If there is a user or password error
-            return 'error';
+            return array('error', 'User or password error');
        
         }
        
@@ -63,7 +67,7 @@ class SimpleApiRestClass {
      * @return the result in json format.
      */
     private function _return_get() {
-		
+	
 		foreach(explode(',', $this->query) as $q) {
 			
 			$result[] = $q;
@@ -82,7 +86,7 @@ class SimpleApiRestClass {
 		foreach(explode(',', $this->query) as $q) {
 			
 			$result[] = $q;
-			
+
 		}
 		return  $result;
 		
@@ -93,16 +97,12 @@ class SimpleApiRestClass {
      * @return the result in json format.
      */
     private function _return_put() {
-		
-		$get_key = explode('->', $this->query);
-		$key = $get_key[0];
-		$data = $get_key[1];
-		foreach(explode(',', $data) as $q) {
 
-			$r[$key][] = str_replace(array('{', '}'), array('', ''), $q);
+		foreach(explode(',', $this->update) as $q) {
+
+			$r[$this->query][] = $q;
 			
 		}
-
 		return  $r;
 		
     }
