@@ -3,7 +3,7 @@
  * this class displays a Simple Api Rest query in json format.
  * @author Juan Chaves, juan.cha63@gmail.com
  * Copyright (C) 2017 Juan Chaves
- * This program is free software; distributed under the artistic license.
+ * GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007.
  */
 class SimpleApiRestClass {
    

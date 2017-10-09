@@ -6,7 +6,7 @@ session_start();
  * Copyright (C) 2017 Juan Chaves
  * This program is free software; distributed under the artistic license.
  */
-//example_get.php?u=admin&p=123456&q=Asus,Iphone&s=get
+//example_get.php?&q=Asus,Iphone
 if($_SESSION['loggedin']) {
 	include('./simple_api_rest_class.php');
 	//Example
