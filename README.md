@@ -6,14 +6,14 @@ Services GET, POST, PUT and DELETE.
 $this->session_ok:
 It is used to confirm that the user is accredited
 
-$query->query:
+$this->query:
 Separate comma array to create, access, modify, or delete an element
 note: in the put service only one field can be updated at a time
 
-$query->update:
+$this->update:
 Array separated by comma, update the fields with the format (title: value, title: value) for service only put
 
-$query->allows_services:
+$this->allows_services:
 Type of service I allow in the query
 
 To use the example, first download all the files, import simple_api_rest.sql and put the connection data to the database in connect.php.php. Then log in to login.html.
@@ -88,5 +88,4 @@ if($_SESSION['loggedin']) {
 	echo 'You must be logged in to access this site'; 
 	
 }
-
 </pre>
