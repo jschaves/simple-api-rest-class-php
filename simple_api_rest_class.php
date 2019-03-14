@@ -1,7 +1,8 @@
 <?php
 /**
  * this class displays a Simple Api Rest query in json format.
- * @author Juan Chaves, juan.cha63@gmail.com
+ * @author Juan Chaves, juanchasp@gmail.com
+
  * Copyright (C) 2017 Juan Chaves
  * GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007.
  */
